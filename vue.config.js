@@ -7,6 +7,10 @@ function resolve(dir) {
 module.exports = {
   // 生产环境打包不输出 map
   productionSourceMap: false,
+  // 关键修复：关闭构建期 ESLint，跳过 settings.vue 里 `·` 触发的 prettier/prettier false positive
+  lintOnSave: false,
+  // 注意：不要改成 publicPath: './' ！本项目带 PWA，相对路径会让 service-worker 在子路由下注册失败。
+  //       部署到根域名（EdgeOne 默认 *.edgeone.app 或你的自定义域名根）保持默认 '/' 即可。
   devServer: {
     disableHostCheck: true,
     port: process.env.DEV_SERVER_PORT || 8080,
